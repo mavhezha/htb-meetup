@@ -50,21 +50,21 @@ FTP transmits credentials as plaintext over port 21:
 
 ```
 USER nathan
-PASS Buck3tH4TF0RM3!
+PASS {redacted}
 ```
 
 ### SSH Access
 
 ```bash
 ssh nathan@10.129.26.15
-# password: Buck3tH4TF0RM3!
+# password: {redacted}
 ```
 
 Credential reuse across FTP and SSH. Shell landed as `nathan`.
 
 ```bash
 cat ~/user.txt
-# 2c49d2eedc3084ab2357ae6e1e232f8f
+# {redacted}
 ```
 
 ---
@@ -93,7 +93,7 @@ Root shell obtained.
 
 ```bash
 cat /root/root.txt
-# 552527d143bc50662bf065fafa6b2ef2
+# {redacted}
 ```
 
 ---
@@ -119,23 +119,3 @@ IDOR on /data/0
 - `getcap -r / 2>/dev/null` is a fast, high-value capability check. Run it early post-foothold.
 - `cap_setuid` on any scripting language runtime is instant root via a one-liner
 
----
-
-## Screenshots
-
-| Step | File |
-|------|------|
-| Nmap all ports | `screenshots/01-nmap-all-ports.png` |
-| Nmap service scan | `screenshots/02-nmap-service-scan.png` |
-| Web dashboard | `screenshots/03-web-dashboard.png` |
-| IDOR: /data/0 | `screenshots/04-idor-data-0.png` |
-| Wireshark FTP stream | `screenshots/05-wireshark-ftp-stream.png` |
-| SSH foothold | `screenshots/06-ssh-foothold.png` |
-| User flag | `screenshots/07-user-flag.png` |
-| getcap output | `screenshots/08-getcap-output.png` |
-| Root shell | `screenshots/09-root-shell.png` |
-| Root flag | `screenshots/10-root-flag.png` |
-
----
-
-*Part of the [oscp-journey](https://github.com/mavhezha/oscp-journey) repo. TJ Null HTB list, Linux Phase L1.*
