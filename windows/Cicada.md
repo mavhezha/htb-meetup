@@ -18,10 +18,10 @@
 
 | Account | Password | NTLM Hash | Source |
 |---|---|---|---|
-| michael.wrightson | `Cicada$M6Corpb*@Lp#nZp!8` | N/A | Default password in HR notice |
-| david.orelious | `aRt$Lp#7t*VQ!3` | N/A | AD description field |
-| emily.oscars | `Q!3@Lp#M6b*7t*Vt` | N/A | Backup_script.ps1 |
-| Administrator | N/A | `2b87e7c93a3e8a0ea4a581937016f341` | SAM dump via SeBackupPrivilege |
+| michael.wrightson | `{redacted}` | N/A | Default password in HR notice |
+| david.orelious | `{redacted}` | N/A | AD description field |
+| emily.oscars | `{redacted}` | N/A | Backup_script.ps1 |
+| Administrator | N/A | `{redacted}` | SAM dump via SeBackupPrivilege |
 
 ---
 
